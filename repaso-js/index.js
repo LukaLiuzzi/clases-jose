@@ -532,3 +532,130 @@ console.log(invertirArray([1, 2, 3, 4, 5]))
  *
  * Eliminar elementos por valor: Crea una función que elimine todos los elementos con un valor específico de un array.
  */
+console.clear()
+const promedio = (array) => {
+  let inicial = 0
+  let prom = 0
+  for (let i = 0; i < array.length; i++) {
+    inicial += array[i]
+    prom = inicial / array.length
+  }
+  return prom
+}
+
+nuevoArray = [2, 4, 6, 8, 1]
+
+const segundoNumeroMasGrande = (n) => {
+  if (n.length < 2) {
+    return null
+  }
+  let ordenado = n.sort((a, b) => b - a)
+  let segundo = ordenado[1]
+  return segundo
+}
+// console.log(segundoNumeroMasGrande(nuevoArray));
+console.log(segundoNumeroMasGrande([1, 20, 40, 50, 60]))
+
+function palindromo(array) {
+  mitad1 = array.slice(0, array.length / 2)
+  mitad2 = array.slice(array.length / 2).reverse()
+  if (JSON.stringify(mitad1) === JSON.stringify(mitad2)) {
+    return "El array es palindromo"
+  } else {
+    return "El array no es palindromo"
+  }
+}
+
+const esPalindromo = (array) => {
+  const copia = structuredClone(array)
+  const invertido = copia.reverse()
+  return JSON.stringify(array) === JSON.stringify(invertido)
+}
+
+console.log(palindromo([1, 2, 3, 2, 1]))
+
+console.log(palindromo([1, 2, 3, 4, 5]))
+
+console.log(palindromo([2, 3, 4, 5]))
+console.log(palindromo([2, 3, 3, 2]))
+
+console.clear()
+console.log(esPalindromo([1, 2, 3, 2, 1]))
+console.log(esPalindromo([1, 2, 3, 4, 5]))
+console.log(esPalindromo([2, 3, 4, 5]))
+console.log(esPalindromo([2, 3, 3, 2]))
+
+const esPrimo = (numero) => {
+  if (numero <= 1) return false
+  if (numero === 2) return true
+  if (numero % 2 === 0) return false
+
+  for (let i = 3; i <= numero / 2; i += 2) {
+    if (numero % i === 0) {
+      return false
+    }
+  }
+
+  return true
+}
+
+// const promedio = (array) => {
+//   let inicial = 0
+//   let prom = 0
+//   for (let i = 0; i < array.length; i++) {
+//     inicial += array[i]
+//     prom = inicial / array.length
+//   }
+//   return prom
+// }
+
+// ===========================================
+// METODO REDUCE
+const carrito = [
+  {
+    id: 1,
+    nombre: "Coca Cola",
+    precio: 100,
+    cantidad: 2,
+  },
+  {
+    id: 2,
+    nombre: "Pepsi",
+    precio: 400,
+    cantidad: 1,
+  },
+  {
+    id: 3,
+    nombre: "Fanta",
+    precio: 300,
+    cantidad: 1,
+  },
+  {
+    id: 4,
+    nombre: "Mirinda",
+    precio: 400,
+    cantidad: 3,
+  },
+]
+
+const total = carrito.reduce((acc, valorActual) => {
+  return acc + valorActual.precio * valorActual.cantidad
+}, 0)
+
+console.log(total)
+
+const promedioConReduce = (array) => {
+  const suma = array.reduce((acc, el) => acc + el)
+  return suma / array.length
+}
+
+/**
+ * Ejercicios usando metodo REDUCE:
+ * Suma de elementos: Escribe una función que sume todos los elementos de un array.
+ *
+ * Concatenación de strings: Implementa una función que tome un array de strings y los concatene en una sola cadena.
+ *
+ * Encontrar el máximo: Escribe una función que encuentre el número más grande en un array.
+ *
+ * Contar elementos: Crea una función que cuente cuántas veces aparece un elemento específico en un array.
+ */
