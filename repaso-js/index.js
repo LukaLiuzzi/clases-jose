@@ -659,3 +659,127 @@ const promedioConReduce = (array) => {
  *
  * Contar elementos: Crea una función que cuente cuántas veces aparece un elemento específico en un array.
  */
+
+const array = [1, 2, 3, 4]
+
+const sumarElementos = (array) => {
+  const suma = array.reduce((acc, el) => acc + el, 0)
+  return suma
+}
+
+console.log(sumarElementos(array))
+console.log(sumarElementos([2, 2, 10, 15]))
+
+const arrayStr = ["hola", "chau"]
+
+const concat = (array) => {
+  const concatenar = array.reduce((acc, el) => acc + " " + el, " ")
+  return concatenar
+}
+
+console.log(concat(arrayStr))
+
+const maximo = (array) => {
+  const max = array.reduce((max, actual) => {
+    if (actual > max) {
+      // Si el elemento actual es mayor al maximo, el acumulador pasa a ser el elemento actual
+      return actual
+    } else {
+      // sino el acumulador sigue siendo el maximo
+      return max
+    }
+  }, array[0])
+  return max
+}
+
+console.log(maximo([1, 6, 2, 3, 5]))
+
+const contarElemento = (array, elemento) => {
+  const contador = array.reduce((contador, elAct) => {
+    if (elAct === elemento) {
+      return contador + 1
+    } else {
+      return contador
+    }
+  }, 0)
+
+  return contador
+}
+
+console.log(contarElemento([1, 2, 3, 4, 5, 5, 5, 5, 5], 5))
+console.log(contarElemento([1, 2, 3, 4, 5, 5, 5, 5, 5], 2))
+console.log(contarElemento([1, 2, 3, 4, 5, 5, 5, 5, 5], 100))
+
+/**
+ const d = [1, 2, 3, 4]
+ * acc = 0
+ * 1ra vuelta: acc = acc + valorActual = 0 + 1 = 1
+ * 2da vuelta: acc = acc + valorActual = 1 + 2 = 3
+ * 3ra vuelta: acc = acc + valorActual = 3 + 3 = 6
+ * 4ta vuelta: acc = acc + valorActual = 6 + 4 = 10
+ */
+
+// ===========================================
+// OBJETOS
+// Declaracion y asignacion de objetos
+console.clear()
+const objPersona = {
+  nombre: "Luka",
+  edad: 21,
+  estaTrabajando: true,
+  familia: ["Juan", "Jose", "Maria"],
+  direccion: {
+    calle: "Av. Siempre Viva",
+    numero: 123,
+  },
+  trabajar: function () {
+    console.log("Estoy dando clases de javascript")
+  },
+  "nombre completo": "Luka Modric",
+}
+
+// Acceder a las propiedades de un objeto
+// 2 formas - Notacion de punto y notacion de corchetes
+console.log(objPersona.nombre)
+console.log(objPersona.edad)
+
+const propiedadAAcceder = "estaTrabajando"
+
+console.log(objPersona["nombre"])
+console.log(objPersona["edad"])
+console.log(objPersona["nombre completo"])
+
+console.log(objPersona.propiedadAAcceder)
+console.log(objPersona[propiedadAAcceder])
+
+// Acceder a los metodos de un objeto
+objPersona.trabajar()
+objPersona["trabajar"]()
+
+// Agregar propiedades a un objeto
+objPersona.apellido = "Perez"
+objPersona["apellido"] = "Perez"
+console.log(objPersona)
+
+// Modificar propiedades de un objeto
+objPersona.edad = 30
+objPersona["edad"] = 30
+console.log(objPersona)
+
+// Eliminar propiedades de un objeto
+delete objPersona.edad
+delete objPersona["edad"]
+console.log(objPersona)
+
+/**
+ * Ejercicios de objetos:
+ * Crear un objeto persona con las siguientes propiedades:
+ * nombre, apellido, edad, estaCasado, tieneHijos, familia, direccion, saludar
+ * Crear un objeto direccion con las siguientes propiedades:
+ * calle, numero, ciudad, provincia, pais
+ *
+ * Una vez que tenemos los 2 objetos creados, agregar el objeto direccion a la propiedad direccion del objeto persona
+ * Agregar un metodo al objeto persona que se llame cumpleaños y que aumente la edad en 1, luego mostrar por consola la edad de la persona
+ * Agregar un metodo al objeto persona que se llame mudanza y que reciba como parametro un objeto direccion y que modifique la propiedad direccion del objeto persona
+ * Eliminar el metodo saludar del objeto persona
+ */
