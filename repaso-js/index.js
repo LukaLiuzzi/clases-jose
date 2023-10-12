@@ -782,4 +782,129 @@ console.log(objPersona)
  * Agregar un metodo al objeto persona que se llame cumpleaños y que aumente la edad en 1, luego mostrar por consola la edad de la persona
  * Agregar un metodo al objeto persona que se llame mudanza y que reciba como parametro un objeto direccion y que modifique la propiedad direccion del objeto persona
  * Eliminar el metodo saludar del objeto persona
+
+
+const obPersona = {
+  nombre: "Jose",
+  apellido: "Machicote",
+  edad: 30,
+  estaCasado: false,
+  tieneHijos: false,
+  direccion: "Ciudadela 1234",
+  saludar: true,
+  cumpleanos: function () {
+    this.edad++
+  },
+}
+
+const objDireccion = {
+  calle: "Ciudadela",
+  numero: 1234,
+  ciudad: "Montevideo",
+  provincia: "Montevideo",
+  pais: "Uruguay",
+}
+
+obPersona.direccion = objDireccion
+console.log(obPersona)
+
+console.log(`Edad antes del cumple: ${obPersona.edad}`)
+obPersona.cumpleanos()
+console.log(`Edad post cumple es: ${obPersona.edad}`)
+
+delete obPersona.saludar
+console.log(obPersona)
+
+obPersona.mudanza = function (direccion) {
+  this.direccion = direccion
+}
+
+obPersona.mudanza({
+  calle: "Av. Siempre Viva",
+  numero: 123,
+  ciudad: "Montevideo",
+  provincia: "Montevideo",
+  pais: "Uruguay",
+})
+
+console.log(obPersona)
+ */
+
+console.clear()
+const nombre2 = "Luka"
+const apellido2 = "Modric"
+
+const pers = {
+  nombre2,
+  apellido2,
+  edad: 30,
+  familia: {
+    padre: "Juan",
+    madre: "Maria",
+  },
+}
+
+console.log(pers)
+
+// Desestructuracion de objetos
+const {
+  nombre2: nombreDePers,
+  apellido2: apellidoDePers,
+  edad: edadDePers,
+  direccion = "No tiene direccion", // Es un valor por defecto. Si no existe la propiedad direccion en el objeto pers, se va a asignar el valor "No tiene direccion"
+  familia: { padre, madre: madreDePers }, // Desestructuramos el objeto familia y le asignamos un alias a la propiedad madre
+} = pers
+
+console.log(
+  nombreDePers,
+  apellidoDePers,
+  edadDePers,
+  direccion,
+  padre,
+  madreDePers
+)
+
+// ===========================================
+/**
+ * 1. Sumar elementos en un array:
+Escribe una función que sume todos los números en un array.
+
+2. Encontrar el número más grande:
+Escribe una función que encuentre el número más grande en un array de números.
+
+3. Filtrar elementos pares:
+Escribe una función que tome un array de números y devuelva un nuevo array solo con los números pares.
+
+4. Contar palabras:
+Escribe una función que cuente el número de palabras en una cadena de texto.
+
+5. Encontrar elementos duplicados:
+Escribe una función que encuentre los elementos duplicados en un array.
+
+6. Calculadora de propina:
+Escribe una función que calcule la propina en una cuenta de restaurante. Debe aceptar el monto de la cuenta y el porcentaje de propina.
+
+7. Calcular promedio:
+Escribe una función que calcule el promedio de un array de números.
+
+8. Convertir Celsius a Fahrenheit:
+Escribe una función que convierta una temperatura en grados Celsius a grados Fahrenheit.
+
+9. Contar las ocurrencias de un elemento en un array:
+Escribe una función que cuente cuántas veces aparece un elemento específico en un array.
+
+10. Verificar palíndromos:
+Escribe una función que verifique si una palabra o frase es un palíndromo (se lee igual al derecho y al revés).
+
+11. Clasificar estudiantes:
+Escribe una función que tome un array de estudiantes con sus calificaciones y devuelva un nuevo array ordenado de mayor a menor según sus calificaciones.
+
+12. Generar un objeto a partir de dos arrays:
+Escribe una función que tome dos arrays, uno de claves y otro de valores, y cree un objeto con las claves y valores correspondientes.
+
+13. Juego de adivinar el número:
+Escribe un juego en el que el programa elija un número aleatorio y el usuario debe adivinarlo. Proporciona pistas de si el número es mayor o menor.
+
+14. Buscar y reemplazar:
+Escribe una función que tome una cadena de texto, busque una palabra específica y la reemplace por otra.
  */
