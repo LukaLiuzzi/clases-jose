@@ -897,14 +897,182 @@ Escribe una función que cuente cuántas veces aparece un elemento específico e
 Escribe una función que verifique si una palabra o frase es un palíndromo (se lee igual al derecho y al revés).
 
 11. Clasificar estudiantes:
-Escribe una función que tome un array de estudiantes con sus calificaciones y devuelva un nuevo array ordenado de mayor a menor según sus calificaciones.
+Escribe una función que tome un array de objetos de estudiantes con sus calificaciones y devuelva un nuevo array ordenado de mayor a menor según sus calificaciones.
 
 12. Generar un objeto a partir de dos arrays:
 Escribe una función que tome dos arrays, uno de claves y otro de valores, y cree un objeto con las claves y valores correspondientes.
 
 13. Juego de adivinar el número:
-Escribe un juego en el que el programa elija un número aleatorio y el usuario debe adivinarlo. Proporciona pistas de si el número es mayor o menor.
+Escribe un juego en el que el programa elija un número aleatorio y el usuario debe adivinarlo. Proporciona pistas de si el número es mayor o menor. Que el usuario tenga como maximo 5 intentos. Si el usuario no adivina el numero, mostrar un mensaje de que perdio y mostrar el numero que el programa habia elegido.
 
 14. Buscar y reemplazar:
 Escribe una función que tome una cadena de texto, busque una palabra específica y la reemplace por otra.
  */
+
+//1. Sumar elementos en un array:
+const sumar22 = (array) => {
+  const suma = array.reduce((acc, el) => acc + el, 0)
+  return suma
+}
+
+console.log(sumar22([2, 3, 4]))
+//2. Encontrar el número más grande:
+const masGrande = (array) => {
+  const grande = array.reduce((inicial, el) => {
+    if (el > inicial) {
+      return el
+    } else {
+      return inicial
+    }
+  })
+  return grande
+}
+
+console.log(masGrande([10, 2, 3, 4]))
+
+// 3 Filtrar elementos pares:filter solo con constantes de afuera?
+const numbersPares = [1, 2, 3, 4]
+const numerosblabla = [2, 3, 6]
+
+const result = numbersPares.filter((array) => array % 2 === 0)
+const result2 = numbersPares.filter((array) => array % 2 !== 0)
+const result3 = [].filter((array) => array % 2 === 0)
+
+console.log(result)
+
+// 4 contar palabras
+const texto = "Esta es una cadena de ejemplo para contar palabras en JavaScript"
+
+const newTexto = texto.split(" ")
+const contarPalabras = newTexto.length
+console.log(contarPalabras)
+
+//5 Encontrar duplicados
+
+const numerosRepetidos = [2, 2, 2, 2, 3, 3, 5, 6]
+
+function encontrarDuplicados(array) {
+  const duplicados = [] // Aca vamos a guardar los elementos duplicados, ej: [2, 3]
+  const elementosRevisados = {} // Aca vamos a guardar los elementos que ya fueron revisados, ej: { 2: 2, 3: 2, 5: 1, 6: 1 }
+
+  // Recorremos el array
+  array.forEach((el) => {
+    if (elementosRevisados[el] === undefined) {
+      // Si el elemento no esta en el objeto elementosRevisados, lo agregamos con el valor 1
+      elementosRevisados[el] = 1
+    } else if (elementosRevisados[el] === 1) {
+      // Si el elemento ya esta en el objeto elementosRevisados, lo agregamos al array duplicados
+      duplicados.push(el)
+      // Y aumentamos en 1 el valor del elemento en el objeto elementosRevisados
+      elementosRevisados[el]++
+    }
+  })
+
+  // Retornamos el array duplicados - [2, 3]
+  return duplicados
+}
+
+console.log(encontrarDuplicados(numerosRepetidos))
+
+// 6. Calculadora de propina:
+function calcularPropina(total, porcentajeDePropina) {
+  const propina = total * (porcentajeDePropina / 100)
+  return propina
+}
+
+console.log(calcularPropina(100, 10))
+
+//7. Calcular promedio: Escribe una función que calcule el promedio de un array de números.
+
+console.clear()
+const prueba = [2, 4]
+
+const promedioP = (array) => {
+  const sumaDeElementos = array.reduce((acc, el) => acc + el, 0)
+  const promediosss = sumaDeElementos / array.length
+  return promediosss
+}
+
+console.log(promedioP(prueba))
+
+//8. Convertir Celsius a Fahrenheit:
+
+const convertirCelaFahr = (celscius) => {
+  const convertido = (celscius * 9) / 5 + 32
+  return convertido
+}
+
+console.log(convertirCelaFahr(0))
+
+//9. Contar las ocurrencias de un elemento en un array:
+function contarOcurrenciasForEach(array, el) {
+  // En el forEach, necesitamos tener una variable auxiliar que nos cuente las ocurrencias
+  let contador = 0
+  array.forEach((elemento) => {
+    if (elemento === el) {
+      // Si el elemento actual es igual al elemento que estamos buscando, aumentamos el contador en 1
+      contador++
+    }
+  })
+  return contador
+}
+
+console.log(contarOcurrenciasForEach([1, 2, 3, 4, 5, 5, 5, 5, 5], 5))
+
+function contarOcurrenciasReduce(array, el) {
+  // En el reduce, no necesitamos variable auxiliar porque tenemos el acumulador. El acumulador va a ser el contador
+  const contador = array.reduce((contador, elemento) => {
+    if (elemento === el) {
+      // Si el elemento actual es igual al elemento que estamos buscando, aumentamos el contador en 1
+      return contador + 1
+    } else {
+      // Si no, retornamos el contador sin modificar
+      return contador
+    }
+  }, 0)
+
+  return contador
+}
+
+//12 Generar un objeto a partir de dos arrays:
+const claves = ["nombre", "apellido", "edad"]
+const valores = ["Luka", "Modric", 30]
+const objeto = {}
+function generarObjeto(claves, valores) {
+  claves.forEach((clave, index) => {
+    // 1er vuelta
+    // clave = "nombre"
+    // index = 0
+    // valores[index] = "Luka"
+    objeto[clave] = valores[index]
+  })
+  return objeto
+}
+
+console.log(generarObjeto(claves, valores))
+
+//13 Juego de adivinar el número: Math.random() devuelve un numero aleatorio entre 0 y 1. Prompt para pedir datos al usuario. Alert para mostrar un mensaje al usuario. Condicionales. Bucles. Funciones.
+
+console.log(Math.random())
+
+//14 Buscar y reemplazar:
+const texto2 =
+  "Esta es una cadena de ejemplo para contar palabras en JavaScript"
+
+const textoNuevo = texto2.replaceAll("a", "o")
+
+console.log(textoNuevo)
+
+//13 Adivinar el numero:
+function game() {
+  const numero = Math.floor(Math.random * 100 + 1) // Numero aleatorio entre 1 y 100
+  let intentos = 0 // Variable que va a contar los intentos del usuario
+
+  // Usar un bucle para que el usuario pueda ingresar un numero hasta 5 veces
+}
+
+game()
+
+// do {
+// Se hace tal cosa
+// } while () // Mientras se cumpla tal condicion
