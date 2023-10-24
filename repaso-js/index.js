@@ -1071,8 +1071,93 @@ function game() {
   // Usar un bucle para que el usuario pueda ingresar un numero hasta 5 veces
 }
 
-game()
-
 // do {
 // Se hace tal cosa
 // } while () // Mientras se cumpla tal condicion
+
+// 10. Verificar palíndromos:
+//Escribe una función que verifique si una palabra o frase es un palíndromo (se lee igual al derecho y al revés).
+function esPalindromoLetras(frase) {
+  const aMinuscula = frase.toLowerCase().replace(/\s/g, "")
+  const copiaReversa = aMinuscula.split("").reverse().join("")
+
+  if (aMinuscula == copiaReversa) {
+    return true
+  } else {
+    return false
+  }
+}
+
+console.log(esPalindromoLetras("Hola mundo"))
+
+//11. Clasificar estudiantes:
+const estudiantes = [
+  { nombre: "Luka", nota: 10 },
+  { nombre: "Roberto", nota: 9 },
+  { nombre: "Jr", nota: 11 },
+]
+
+console.log(estudiantes[0])
+
+const estudiantesOrdenado = estudiantes.sort(function name(a, b) {
+  return b.nota - a.nota
+})
+
+console.log(estudiantesOrdenado)
+
+//13 Juego de adivinar el número: Math.random() devuelve un numero aleatorio entre 0 y 1. Prompt para pedir datos al usuario. Alert para mostrar un mensaje al usuario. Condicionales. Bucles. Funciones.
+
+function game() {
+  //math floor redondea para abajo 1,21 lo deja en 1
+  //math random da numeros random
+  const numero = Math.floor(Math.random() * 100 + 1) // Numero aleatorio entre 1 y 100
+  let intentos = 0 // Variable que va a contar los intentos del usuario
+  console.log(numero)
+  do {
+    //LE PIDO AL USUARIO QUE INGRESE UN NUMERO ENTRE 1 Y 100
+    let adivinar = Number(prompt("Introduce un numero entre 1 y 100"))
+
+    //INCREMENTO EL CONTADOR DE LOS INTENTOS
+    intentos++
+    // si adivinar es estricamente IGUAL al numero de entrada GANASTE
+    if (adivinar === numero) {
+      alert(`¡Felicidades! Adivinaste el número en ${intentos} intentos.`)
+      break // si adivina termina el juego
+    } else {
+      alert(`El numero no es correcto, sigue intentando`)
+    }
+
+    if (intentos >= 5) {
+      alert(
+        `Lo siento, has alcanzado el límite de intentos. El número era ${numero}.`
+      )
+      break // Termina el juego después de 5 intentos
+    }
+  } while (true)
+}
+
+function game2() {
+  const numero = Math.floor(Math.random() * 100 + 1)
+
+  console.log(numero)
+  let intentos = 0
+
+  do {
+    const adivinar = Number(prompt("Introduce un numero entre 1 y 100"))
+
+    intentos++
+
+    if (adivinar === numero) {
+      alert(`¡Felicidades! Adivinaste el número en ${intentos} intentos.`)
+      return
+    } else {
+      alert(`El numero no es correcto, sigue intentando`)
+    }
+  } while (intentos < 5)
+
+  alert(
+    `Lo siento, has alcanzado el límite de intentos. El número era ${numero}.`
+  )
+}
+
+game2()
