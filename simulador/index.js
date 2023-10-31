@@ -54,19 +54,41 @@ const productos = [
     stock: 10,
   },
 ]
+const carrito = []
 
 function main(params) {
-  menu()
+  const datos = menu()
+  if (datos == 1) {
+    mostrarProductos(productos)
+  }
 }
 
 function menu(params) {
   let datos = prompt(`Ingrese: 
   1: Mostrar productos
-  2: Agregar al carrito
-  3: Mostrar el carrito
-  4: Eliminar producto del carrito 
-  5: Finalizar compra
-  6: salir`)
+  2: Mostrar el carrito
+  3: Finalizar compra
+  4: salir`)
+  return datos
+}
+
+function mostrarProductos(productos) {
+  const mapped = productos.map((producto) => {
+    return `${producto.id}: ${producto.nombre} - $${producto.precio}`
+  })
+  alert(mapped)
+
+  do {
+    const seleccion = prompt("Ingrese el id del producto que desea agregar")
+    agregarAlcarrito(seleccion, productos)
+  } while (window.confirm("Desea agregar un producto al carrito?"))
+}
+
+function agregarAlcarrito(seleccion, productos) {
+  const productoBuscado = productos.find((el) => el.id == seleccion)
+  carrito.push(productoBuscado)
+
+  return carrito
 }
 
 main()
