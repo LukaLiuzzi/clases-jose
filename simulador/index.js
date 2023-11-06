@@ -14,6 +14,7 @@
  * - Si el usuario pone una opcion que no existe debe volver a preguntar
  * - El usuario debe poder volver al menu principal en cualquier momento
  * - Deben haber validaciones.
+ * - Finalizar compra te debe sumar 21% iva, preguntar como queres pagar, y si elegis con tarjetas, hacer el calculo de cuanto te queda cada cuota
  */
 
 const productos = [
@@ -57,18 +58,26 @@ const productos = [
 const carrito = []
 
 function main(params) {
-  const datos = menu()
-  if (datos == 1) {
-    mostrarProductos(productos)
-  }
+  let datos
+  do {
+    datos = menu()
+    if (datos == 1) {
+      mostrarProductos(productos)
+    } else if (datos == 2) {
+      mostrarCarrito(carrito)
+    } else if (datos == 3) {
+      eliminarProducto()
+    }
+  } while (datos != 5)
 }
 
 function menu(params) {
   let datos = prompt(`Ingrese: 
   1: Mostrar productos
   2: Mostrar el carrito
-  3: Finalizar compra
-  4: salir`)
+  3: Eliminar producto de carrito
+  4: Finalizar Compra
+  5: salir`)
   return datos
 }
 
@@ -81,14 +90,47 @@ function mostrarProductos(productos) {
   do {
     const seleccion = prompt("Ingrese el id del producto que desea agregar")
     agregarAlcarrito(seleccion, productos)
-  } while (window.confirm("Desea agregar un producto al carrito?"))
+  } while (window.confirm("Desea agregar otro producto al carrito?"))
 }
 
 function agregarAlcarrito(seleccion, productos) {
   const productoBuscado = productos.find((el) => el.id == seleccion)
   carrito.push(productoBuscado)
 
-  return carrito
+  return carrito // este return lo uso para mostrar carrito //
+}
+
+function mostrarCarrito(carrito) {
+  const total = carrito.reduce((ac, carro) => ac + carro.precio, 0)
+  const mappedCarrito = carrito.map((carro) => {
+    return `${carro.nombre} - $${carro.precio}`
+  })
+  carritoUnido = mappedCarrito.join("\n")
+
+  alert(`Este es tu carrito:
+        ${carritoUnido}    
+        total: $${total}`)
+}
+
+function eliminarProducto() {
+  if (carrito.length > 0) {
+    const total = carrito.reduce((ac, carro) => ac + carro.precio, 0)
+    const carritoMapped = carrito.map((carro) => {
+      return `
+      id: ${carro.id} 
+      nombre: ${carro.nombre} 
+      `
+    })
+    const idEliminarProducto =
+      prompt(`Este es tu carrito, Ingresa el id del producdto a eliminar:
+    ${carritoMapped}
+    total: $${total}`)
+    const filtrarProducto = carrito.filter(
+      (carro) => carro.id != idEliminarProducto
+    )
+  } else {
+    alert(`Tu carrito esta vacio, por favor ingresa tu compra`)
+  }
 }
 
 main()
