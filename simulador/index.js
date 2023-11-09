@@ -88,16 +88,31 @@ function mostrarProductos(productos) {
   alert(mapped)
 
   do {
-    const seleccion = prompt("Ingrese el id del producto que desea agregar")
-    agregarAlcarrito(seleccion, productos)
+    const seleccion = parseInt(
+      prompt("Ingrese el id del producto que desea agregar")
+    ) //1
+    const cantidad = parseInt(
+      prompt("Ingrese la cantidad del producto que desea agregar")
+    ) //2 //stock
+
+    const comparar = productos.find((producto) => {
+      return producto.id === seleccion
+    })
+    if (comparar.stock >= cantidad) {
+      agregarAlcarrito(seleccion, cantidad, productos)
+    } else {
+      alert(`La cantidad es superior al stock`)
+    }
   } while (window.confirm("Desea agregar otro producto al carrito?"))
 }
 
-function agregarAlcarrito(seleccion, productos) {
+function agregarAlcarrito(seleccion, cantidad, productos) {
+  // restar el stock del carrito de producto //
   const productoBuscado = productos.find((el) => el.id == seleccion)
+
   carrito.push(productoBuscado)
 
-  return carrito // este return lo uso para mostrar carrito //
+  return carrito
 }
 
 function mostrarCarrito(carrito) {
@@ -128,6 +143,15 @@ function eliminarProducto() {
     const filtrarProducto = carrito.filter(
       (carro) => carro.id != idEliminarProducto
     )
+
+    const nuevoCarrito = filtrarProducto.map((carro) => {
+      return `
+      id: ${carro.id}
+      nombre: ${carro.nombre}
+      precio: ${carro.precio}`
+    })
+
+    alert(`Tu carrito ahora es ${nuevoCarrito}`)
   } else {
     alert(`Tu carrito esta vacio, por favor ingresa tu compra`)
   }
