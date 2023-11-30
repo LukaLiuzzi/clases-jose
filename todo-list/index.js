@@ -45,9 +45,31 @@ function menu(params) {
   return datos
 }
 
-function agregarTareas(params) {
+function agregarTareas() {
+  const maximoLetras = 50 // declaro el largo de los caracteres
+
   const tareas = prompt(`Ingrese la tarea que desea hacer`)
+  if (tareas.length <= 1) {
+    alert(`Ingresa al menos una palabra`)
+    return
+  }
+  if (tareas.length > maximoLetras) {
+    alert(
+      `tu tarea es de ${tareas.length} caracteres, debes ingresar una tarea de ${maximoLetras}`
+    )
+    return
+  }
   const categoria = prompt(`Ingrese la categoria de la tarea`)
+  if (categoria.length <= 1) {
+    alert(`Ingresa al menos una palabra`)
+    return
+  }
+  if (categoria.length > maximoLetras) {
+    alert(
+      `Tu categoria es de ${categoria.length} caracteres, debes ingresar una categoria de ${maximoLetras}`
+    )
+    return
+  }
 
   const nuevaTarea = {
     id: Math.floor(Math.random() * 100),
@@ -113,11 +135,22 @@ function editarTarea(deseos) {
           deseo.estado === true ? "completado" : "pendiente"
         }`
     )
+    // PEDIR al usuario que ingrse un ID
     const idTareaAEditar = parseInt(
       prompt(`Que tarea desdeas editar? Ingresa su ID \n${mostrar.join("\n")} `)
     )
+
+    //  buscar si el ID es valido
+
+    const esValidoId = deseos.some((deseo) => deseo.id === idTareaAEditar)
+
+    if (!esValidoId) {
+      alert(`Tu id no es correcto`)
+      return
+    }
+
     //  find para encontrar la tarea
-    const deseoEditar = deseos.find((deseo) => deseo.id === idTareaAEditar) // { id: 2, tarea: "hola", estado: false , categoria: "deporte"}
+    const deseoEditar = deseos.find((deseo) => deseo.id === idTareaAEditar)
 
     const campoAEditar = parseInt(
       prompt(
@@ -128,14 +161,27 @@ function editarTarea(deseos) {
       const edicionCategoria = prompt(
         `tu categoria actual es: ${deseoEditar.categoria}, ingresa la nueva categoria`
       )
-      deseoEditar.categoria =
-        edicionCategoria[ // { id: 2, tarea: "hola", estado: false , categoria: "Cocina"}
-          ({ id: 1, tarea: "hola", estado: false, categoria: "deporte" },
-          { id: 2, tarea: "hola", estado: false, categoria: "deporte" })
-        ]
-      deseos.splice(idTareaAEditar - 1, 1, deseoEditar) // { id: 2, tarea: "hola", estado: false , categoria: "deporte"} => { id: 2, tarea: "hola", estado: false , categoria: "Cocina"}
+      deseoEditar.categoria = edicionCategoria
+      console.log(deseoEditar.categoria)
+      // deseos.splice(idTareaAEditar, 1, deseoEditar);
+    } else if (campoAEditar === 2) {
+      const edicionTarea = prompt(
+        `tu tarea actual es: ${deseoEditar.tarea}, ingresa la nueva tarea`
+      )
+      deseoEditar.tarea = edicionTarea
+      // deseos.splice(idTareaAEditar, 1, edicionTarea);
+    } else if (campoAEditar === 3) {
+      const edicionEstado = parseInt(
+        prompt(`tu estado actual es ${deseoEditar.estado} deseas cambiarlo a 'completado'?
+      Ingresa 1 para 'completado', Ingrsa 2 para 'pendiente`)
+      )
+      if (edicionEstado === 1) {
+        deseoEditar.estado = true
+      }
+      if (edicionEstado === 2) {
+        deseoEditar.estado = false
+      }
     }
-    // mofico el estado de deseoEditar a true en vez de false
   }
 }
 
