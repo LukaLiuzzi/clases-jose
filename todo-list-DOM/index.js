@@ -23,6 +23,21 @@
 // JSON.stringify() // Convertir a string
 // JSON.parse() // Convertir a objeto
 
+// Variables globales
+// tareas = []
+// categorias = []
+
+// ELEMENTOS DEL DOM
+// const contenedorTareas = document.getElementById("contenedor-tareas")
+
+// FUNCIONES
+// function renderizarTareas(tareas) {}
+// functionm renderizarCategorias(categorias) {}
+
+// EVENTOS
+// form.addEventListener("submit", (e) => {})
+// form.addEventListener("submit", (e) => {})
+
 let tareas = JSON.parse(window.localStorage.getItem("tareas")) || []
 
 const contenedorTareas = document.getElementById("contenedor-tareas")
@@ -33,7 +48,7 @@ const formulario = document.querySelector("#formulario") //formulario de categor
 
 //formulario categorias
 formulario.addEventListener("submit", (e) => {
-  e.preventDefault() // no se reccarga la pagina
+  e.preventDefault() // no se recarga la pagina
   const categoria = document.getElementById("categoria").value
 
   categorias.push({
@@ -49,13 +64,22 @@ formulario.addEventListener("submit", (e) => {
     contenedorTareas.style.display = "none"
   }
 })
-console.log(categorias)
 
 // renderizar categorias
-
+const selectCategorias = document.getElementById("select-categoria")
 const categoriasAmbas = document.getElementById("listadoCategorias")
 function renderizarCategorias(categorias) {
   categoriasAmbas.innerHTML = ""
+
+  // mostrar las categorias en el SELECT
+
+  const opcionesHtml = categorias.map(
+    (el) => `<option value="${el.id}"> ${el.categoria}</option>`
+  )
+  selectCategorias.innerHTML = opcionesHtml
+
+  //mostrar las categorrias en el LI
+
   categorias.forEach((el) => {
     const cat = document.createElement("li")
 
@@ -88,6 +112,8 @@ function renderizarCategorias(categorias) {
 
 form.addEventListener("submit", (e) => {
   e.preventDefault() // no se recarga la pagina
+  // agarro el valor pero en ID tengo que ver como usar el valor del ID al de la categoria
+  const categoriaSeleccionada = selectCategorias.value
 
   if (form.getAttribute("aria-action") === "create") {
     const tarea = document.getElementById("tarea").value
@@ -119,7 +145,9 @@ form.addEventListener("submit", (e) => {
       titulo: tarea,
       estado: false,
       fecha: new Date(),
+      categoria: categoriaSeleccionada,
     })
+    console.log(tareas)
 
     window.localStorage.setItem("tareas", JSON.stringify(tareas))
     renderizarTareas(tareas)
@@ -154,13 +182,15 @@ function renderizarTareas(tareas) {
   tareasAmbas.innerHTML = ""
   tareas.forEach((el) => {
     const tarea = document.createElement("li")
+
+    const { categoria } = categorias.find((cat) => cat.id === el.categoria)
     // Agregar la clase "list-group-item" a la tarea
     tarea.classList.add("list-group-item")
     const tareaHtml = `
     
      ${el.titulo} ${el.estado === true ? "terminada" : "pendiente"} ${new Date(
       el.fecha
-    ).toLocaleDateString()}
+    ).toLocaleDateString()} ${categoria}
 
      <button type='button' class="me-2 btn" id="edit-${el.id}">
      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
