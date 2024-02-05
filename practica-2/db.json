@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "title": "Coca cola",
+        "price": 1.5,
+        "image": "https://www.coca-cola.com.br/content/dam/journey/br/pt/private/2020/07/",
+        "stock": 10,
+        "description": "Coca cola 2L",
+        "categorias": "bebidas"
+    },
+    {
+        "id": 1,
+        "title": "Membrillo",
+        "price": 1.5,
+        "image": "https://www.coca-cola.com.br/content/dam/journey/br/pt/private/2020/07/",
+        "stock": 10,
+        "description": "Coca cola 2L",
+        "categorias": "solidos"
+    },
+    {
+        "id": 1,
+        "title": "Fanta",
+        "price": 1.5,
+        "image": "https://www.coca-cola.com.br/content/dam/journey/br/pt/private/2020/07/",
+        "stock": 10,
+        "description": "Coca cola 2L",
+        "categorias": "bebidas"
+    }
+]
